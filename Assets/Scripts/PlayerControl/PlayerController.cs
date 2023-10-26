@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera _playerCamera;
     [SerializeField] private float _maxPlayerSpeed;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private IsPlayerGrounded _isPlayerGrounded;
     private InputReader _inputReader;
     private Rigidbody _playerRB;
    
@@ -18,9 +19,9 @@ public class PlayerController : MonoBehaviour
         _inputReader = GetComponent<InputReader>();
         _playerRB = GetComponent<Rigidbody>();
     }
+
     private void FixedUpdate()
     {
-        Debug.Log(_inputReader.GetIsJumping());
         PlayerRotation();
         if (_inputReader.GetVerticalInput() != 0 || _inputReader.GetHorizontalInput() != 0) 
         {
@@ -55,10 +56,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if (_inputReader.GetIsJumping())
+        if (_inputReader.GetIsJumping() && _isPlayerGrounded.IsJumping())
         {
-            //_playerRB.AddForce(UnityEngine.Vector2.up * _jumpForce, ForceMode.Impulse);
             _playerRB.AddForce(UnityEngine.Vector2.up * _jumpForce, ForceMode.Impulse);
+            //_playerRB.AddForce(UnityEngine.Vector2.up * _jumpForce, ForceMode.Impulse);
         }
     }
 
