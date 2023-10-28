@@ -34,7 +34,6 @@ public class InputReader : MonoBehaviour
         }
     }
     
-
     private int NormalizedInput(string Direction)
     {
         if (Input.GetAxis(Direction) > 0) { return 1; }

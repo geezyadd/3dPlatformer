@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _playerRotationSpeed;
-    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _accelerationSpeed;
     [SerializeField] private Camera _playerCamera;
-    [SerializeField] private float _maxPlayerSpeed;
+    [SerializeField] private float _playerSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private IsPlayerGrounded _isPlayerGrounded;
     private InputReader _inputReader;
@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
             Movement();
         }
         Jump();
-
-
+        //Debug.Log(_inputReader.GetIsJumping() + " input reader");
+        //Debug.Log(_isPlayerGrounded.IsJumping() + " isGrounded");
     }
 
     private void Movement() 
@@ -37,12 +37,13 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(_playerRB.velocity.magnitude);
         Vector3 ForwardDirection = _playerCamera.transform.forward.normalized;
         ForwardDirection.y = 0;
-        _playerRB.AddForce(ForwardDirection * _movementSpeed * _inputReader.GetVerticalInput() * Time.deltaTime);
-        _playerRB.AddForce(_playerCamera.transform.right.normalized * _movementSpeed * _inputReader.GetHorizontalInput() * Time.deltaTime);
+        //_playerRB.AddForce(ForwardDirection * _movementSpeed * _inputReader.GetVerticalInput() * Time.deltaTime);
+        //_playerRB.AddForce(_playerCamera.transform.right.normalized * _movementSpeed * _inputReader.GetHorizontalInput() * Time.deltaTime);
+        _playerRB.AddForce(_accelerationSpeed * Time.deltaTime * (ForwardDirection * _inputReader.GetVerticalInput() + _playerCamera.transform.right.normalized * _inputReader.GetHorizontalInput()));
         //transform.Translate(_movementSpeed * Time.deltaTime * (ForwardDirection * _inputReader.GetVerticalInput() + _playerCamera.transform.right.normalized * _inputReader.GetHorizontalInput()));
-        if (_playerRB.velocity.magnitude > _maxPlayerSpeed)
+        if (_playerRB.velocity.magnitude > _playerSpeed)
         {
-            _playerRB.velocity = _playerRB.velocity.normalized * _maxPlayerSpeed;
+            _playerRB.velocity = _playerRB.velocity.normalized * _playerSpeed;
         }
         //_playerRB.velocity = _movementSpeed * Time.deltaTime * (ForwardDirection * _inputReader.GetVerticalInput() + _playerCamera.transform.right.normalized * _inputReader.GetHorizontalInput());
     }
