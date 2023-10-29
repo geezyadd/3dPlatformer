@@ -26,7 +26,7 @@ public class IsPlayerGrounded : MonoBehaviour
         float cosAngle = Vector3.Dot(contact.normal.normalized, Vector3.up.normalized);
         // Ќайдем угол в градусах
         float angle = Mathf.Acos(cosAngle) * Mathf.Rad2Deg;
-        // ≈сли угол меньше 45 градусов или равен 90 градусов, считаем контакт "землей"
+        // ≈сли угол меньше 45 градусов, считаем контакт "землей"
         return angle < _correctJumpAngle;
     }
     private void OnCollisionExit(Collision collision)
