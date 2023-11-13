@@ -16,6 +16,8 @@ public class InputReader : MonoBehaviour
     {
         InputSeter();
         IsJumping();
+        Debug.Log("hor" +  _horizontalInput);
+        Debug.Log("ver" + _verticalInput);
     }
     private void InputSeter() 
     {

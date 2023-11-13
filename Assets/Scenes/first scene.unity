@@ -273,6 +273,7 @@ MonoBehaviour:
   _isPlayerGrounded: {fileID: 84265391}
   _jumpDuration: 1
   _playerSpeed: 10
+  _playerTestAnimator: {fileID: 1756642109}
 --- !u!54 &84265390
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1809,6 +1810,11 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &1756642109 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7365748923767361718, guid: 4e14536821986c54bb8c6d3160c19cfc, type: 3}
+  m_PrefabInstance: {fileID: 1533963573}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1782501788
 GameObject:
   m_ObjectHideFlags: 0
