@@ -9,6 +9,10 @@ public class JumpPlayerController : MonoBehaviour
 
     //private float _expiredTime;
     //private float _duration;
+    public void StopCoroutine()
+    {
+        StopAllCoroutines();
+    }
 
     public void AnimationsPlaying(Transform jumper, float duration, bool isPlayerMove) 
     {
@@ -34,7 +38,7 @@ public class JumpPlayerController : MonoBehaviour
         float progress = 0;
 
         Vector3 startPosition = jumper.position;
-
+        Vector3 jumperForward = jumper.forward;
         while (progress < 1)
         {
             expiredSeconds += Time.deltaTime;
@@ -48,9 +52,10 @@ public class JumpPlayerController : MonoBehaviour
                 jumper.position = startPosition + new Vector3(0, _yAnimation.Evaluate(progress), 0);
             }
             else 
-            { 
-            Vector3 newPosition = startPosition + jumper.forward * forwardValue + new Vector3(0, yValue, 0);
-            jumper.position = newPosition;
+            {
+
+                Vector3 newPosition = startPosition + jumperForward * forwardValue * 2 + new Vector3(0, yValue, 0);
+                jumper.position = newPosition;
             }
             
             
@@ -58,4 +63,5 @@ public class JumpPlayerController : MonoBehaviour
             yield return null;
         }
     }
+    
 }
